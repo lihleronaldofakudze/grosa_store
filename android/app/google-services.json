@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1016845620587",
+    "project_id": "grosa-store",
+    "storage_bucket": "grosa-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016845620587:android:ce26078135ca9e204ea82e",
+        "android_client_info": {
+          "package_name": "io.cloutdevelopers.grosa_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016845620587-ksoek1htkcnsp1kvk9i5aq62do9ljhdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.cloutdevelopers.grosa_store",
+            "certificate_hash": "69e077d02e0633c2811aab49f69a71cd9395d0d4"
+          }
+        },
+        {
+          "client_id": "1016845620587-7o5l1ie1mei94om822t1ogppjcn9ifoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqQcLtxDsQW0rK9M70CIGrAhlE_-Z9CcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016845620587-7o5l1ie1mei94om822t1ogppjcn9ifoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
