@@ -2,7 +2,9 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grosa_store/models/Branch.dart';
 import 'package:grosa_store/models/CurrentUser.dart';
+import 'package:grosa_store/models/Offer.dart';
 import 'package:grosa_store/screens/account_screen.dart';
 import 'package:grosa_store/screens/address/addresses_screen.dart';
 import 'package:grosa_store/screens/address/delivery_address.dart';
@@ -40,7 +42,15 @@ class MyApp extends StatelessWidget {
         StreamProvider<List<Deal>>.value(
           value: DatabaseService().deals,
           initialData: [],
-        )
+        ),
+        StreamProvider<List<Branch>>.value(
+          value: DatabaseService().branches,
+          initialData: [],
+        ),
+        StreamProvider<List<Offer>>.value(
+          value: DatabaseService().offers,
+          initialData: [],
+        ),
       ],
       child: MaterialApp(
         routes: {

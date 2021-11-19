@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:grosa_store/widgets/drawer_widget.dart';
 
-import 'branches.dart';
+import 'branches_screen.dart';
 import 'categories_screen.dart';
 import 'home_screen.dart';
 import 'notifications.dart';
-import 'offer.dart';
+import 'offers_screen.dart';
 
 class CustomerScreen extends StatefulWidget {
   @override
@@ -17,8 +17,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
   final tabs = [
     HomeScreen(),
     Categories(),
-    Branches(),
-    Offer(),
+    BranchesScreen(),
+    OfferScreen(),
     Notifications()
   ];
 

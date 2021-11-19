@@ -1,6 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:grosa_store/models/Deal.dart';
 import 'package:grosa_store/widgets/main_container.dart';
-
+import 'package:new_version/new_version.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,8 +11,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  _checkVersion() async {
+    final newVersion = NewVersion(androidId: 'io.cloutdevelopers.grosa_store');
+    final status = await newVersion.getVersionStatus();
+    if (status != null)
+      newVersion.showUpdateDialog(context: context, versionStatus: status);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkVersion();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final deals = Provider.of<List<Deal>>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -31,7 +48,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefixIcon: Icon(Icons.search)),
             ),
           ),
-          // CarouselSlider(),
+          CarouselSlider(
+            options: CarouselOptions(height: 200, autoPlay: true),
+            items: deals.map((deal) {
+              return Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage(deal.image))),
+              );
+            }).toList(),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 7),
             child: SizedBox(

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grosa_store/models/Address.dart';
+import 'package:grosa_store/models/Branch.dart';
 import 'package:grosa_store/models/Customer.dart';
 import 'package:grosa_store/models/Deal.dart';
+import 'package:grosa_store/models/Offer.dart';
 
 class DatabaseService {
   final String? uid;
@@ -12,6 +14,10 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('customers');
   final CollectionReference _dealsCollection =
       FirebaseFirestore.instance.collection('deals');
+  final CollectionReference _branchesCollection =
+      FirebaseFirestore.instance.collection('branches');
+  final CollectionReference _offersCollection =
+      FirebaseFirestore.instance.collection('offers');
 
   //Check If User Already Exists In Database
   checkCustomer() async {
@@ -63,7 +69,7 @@ class DatabaseService {
   }
 
   //Get Address List Snapshot
-  List<Address> _addressesListFromSnapshot(QuerySnapshot snapshot) {
+  List<Address> _addressesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Address(
           id: doc.id,
@@ -81,9 +87,10 @@ class DatabaseService {
         .doc(uid)
         .collection('addresses')
         .snapshots()
-        .map(_addressesListFromSnapshot);
+        .map(_addressesFromSnapshot);
   }
 
+  //Deals
   List<Deal> _dealsFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Deal(
@@ -91,7 +98,39 @@ class DatabaseService {
     }).toList();
   }
 
+  //Stream Deals
   Stream<List<Deal>> get deals {
     return _dealsCollection.snapshots().map(_dealsFromSnapshot);
+  }
+
+  //Offers
+  List<Offer> _offersFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Offer(
+          id: doc.id, image: doc.get('image'), postedAt: doc.get('postedAt'));
+    }).toList();
+  }
+
+  //Stream Deals
+  Stream<List<Offer>> get offers {
+    return _offersCollection.snapshots().map(_offersFromSnapshot);
+  }
+
+  //Branches
+  List<Branch> _branchesFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Branch(
+          id: doc.id,
+          image: doc.get('image'),
+          name: doc.get('name'),
+          address: doc.get('address'),
+          numbers: doc.get('numbers'),
+          hours: doc.get('hours'));
+    }).toList();
+  }
+
+  //Stream Branches
+  Stream<List<Branch>> get branches {
+    return _branchesCollection.snapshots().map(_branchesFromSnapshot);
   }
 }

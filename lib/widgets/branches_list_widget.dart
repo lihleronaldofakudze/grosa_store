@@ -1,24 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:grosa_store/models/branch.dart';
+import 'package:grosa_store/models/Branch.dart';
+import 'package:provider/provider.dart';
 
 class BranchesList extends StatelessWidget {
-  final branches = [
-    Branch(
-        image: 'images/icon.png',
-        name: 'Kasani General Dealer',
-        address: 'Mbabane, Sidvwashini',
-        numbers: '+26876123456',
-        hours: 'Monday - Saturday 9am - 6pm | Sunday 12pm 6pm'),
-    Branch(
-        image: 'images/icon.png',
-        name: 'Kasani General Dealer',
-        address: 'Mbabane, Sidvwashini',
-        numbers: '+26876123456',
-        hours: 'Monday - Saturday 9am - 6pm | Sunday 12pm 6pm'),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final branches = Provider.of<List<Branch>>(context);
     return ListView.separated(
         itemBuilder: (context, index) {
           return Container(
@@ -30,7 +18,7 @@ class BranchesList extends StatelessWidget {
                   height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(branches[index].image),
+                          image: NetworkImage(branches[index].image),
                           fit: BoxFit.cover)),
                 ),
                 SizedBox(
@@ -45,14 +33,28 @@ class BranchesList extends StatelessWidget {
                 ),
                 Text(
                   branches[index].address,
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-                Text(
-                  branches[index].numbers,
-                  style: TextStyle(fontSize: 16),
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: 'Contact Info : ',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    TextSpan(
+                      text: branches[index].numbers,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ]),
                 ),
                 SizedBox(
                   height: 5,
@@ -61,6 +63,15 @@ class BranchesList extends StatelessWidget {
                   branches[index].hours,
                   style: TextStyle(color: Colors.grey, fontSize: 15),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    IconButton(onPressed: () {}, icon: Icon(Icons.facebook)),
+                    IconButton(onPressed: () {}, icon: Icon(Icons.web)),
+                  ],
+                )
               ],
             ),
           );

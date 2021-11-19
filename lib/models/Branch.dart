@@ -1,4 +1,5 @@
 class Branch {
+  final String id;
   final String image;
   final String name;
   final String address;
@@ -6,7 +7,8 @@ class Branch {
   final String hours;
 
   Branch(
-      {required this.image,
+      {required this.id,
+      required this.image,
       required this.name,
       required this.address,
       required this.numbers,

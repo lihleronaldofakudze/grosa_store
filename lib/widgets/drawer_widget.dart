@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:grosa_store/models/CurrentUser.dart';
 import 'package:grosa_store/models/Customer.dart';
 import 'package:grosa_store/services/database_service.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
-
-import 'loading_widget.dart';
 
 Drawer drawerWidget(BuildContext context) {
   final currentUser = Provider.of<CurrentUser?>(context);
@@ -193,7 +192,20 @@ Drawer drawerWidget(BuildContext context) {
               ],
             );
           } else {
-            return LoadingWidget();
+            return Container(
+              child: Center(
+                child: LoadingIndicator(
+                  indicatorType: Indicator.lineScale,
+                  backgroundColor: Colors.white,
+                  colors: [
+                    Colors.green,
+                    Colors.red,
+                    Colors.orange,
+                    Colors.yellow
+                  ],
+                ),
+              ),
+            );
           }
         }),
   );
