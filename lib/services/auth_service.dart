@@ -21,29 +21,65 @@ class AuthService {
     return _auth.authStateChanges().map(_userFromFirebase);
   }
 
+  //Sign In With Email
+  Future<CurrentUser?> signInUsingEmail(
+      {required String email, required String password}) async {
+    try {
+      final UserCredential _userCredential = await _auth
+          .signInWithEmailAndPassword(email: email, password: password);
+      return _userFromFirebase(_userCredential.user);
+    } catch (error) {
+      print(error);
+      return null;
+    }
+  }
+
+  //Sign Up With Email
+  Future<CurrentUser?> signUpUsingEmail(
+      {required String email, required String password}) async {
+    try {
+      final UserCredential _userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      return _userFromFirebase(_userCredential.user);
+    } catch (error) {
+      print(error);
+      return null;
+    }
+  }
+
   //Google Sign In
   Future<CurrentUser?> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-    final UserCredential userCredential =
-        await _auth.signInWithCredential(credential);
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
 
-    return _userFromFirebase(userCredential.user);
+      return _userFromFirebase(userCredential.user);
+    } catch (error) {
+      print(error);
+      return null;
+    }
   }
 
   //Facebook Sign In
   Future<CurrentUser?> signInWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.token);
-    final UserCredential userCredential =
-        await _auth.signInWithCredential(facebookAuthCredential);
-    return _userFromFirebase(userCredential.user);
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(facebookAuthCredential);
+      return _userFromFirebase(userCredential.user);
+    } catch (error) {
+      print(error);
+      return null;
+    }
   }
 
   //Sign Out

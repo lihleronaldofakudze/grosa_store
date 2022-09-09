@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:grosa_store/models/Deal.dart';
 import 'package:grosa_store/widgets/main_container.dart';
-import 'package:new_version/new_version.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,17 +10,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  _checkVersion() async {
-    final newVersion = NewVersion(androidId: 'io.cloutdevelopers.grosa_store');
-    final status = await newVersion.getVersionStatus();
-    if (status != null)
-      newVersion.showUpdateDialog(context: context, versionStatus: status);
-  }
-
   @override
   void initState() {
     super.initState();
-    _checkVersion();
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key? key}) : super(key: key);
@@ -8,18 +7,14 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LoadingIndicator(
-              indicatorType: Indicator.pacman,
-              backgroundColor: Colors.white,
-              colors: [Colors.red, Colors.green, Colors.blue],
-            ),
+          children: const [
+            CircularProgressIndicator(),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Please wait...',

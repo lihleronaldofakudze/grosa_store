@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1016845620587-e8psh0g12tnqs65erjmd6njc3icvpr9h.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1016845620587-e8psh0g12tnqs65erjmd6njc3icvpr9h</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1016845620587-ksoek1htkcnsp1kvk9i5aq62do9ljhdp.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC9nHfPZBwc585-eqeJQbwLDNQGpisKvog</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1016845620587</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.cloutdevelopers.grosaStore</string>
+	<key>PROJECT_ID</key>
+	<string>grosa-store</string>
+	<key>STORAGE_BUCKET</key>
+	<string>grosa-store.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1016845620587:ios:17cb8eb232bb47e04ea82e</string>
+</dict>
+</plist>

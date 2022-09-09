@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grosa_store/models/CurrentUser.dart';
-import 'package:grosa_store/screens/welcome_screen.dart';
+import 'package:grosa_store/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'customer_screen.dart';
@@ -13,7 +13,7 @@ class AuthStateScreen extends StatelessWidget {
     final currentUser = Provider.of<CurrentUser?>(context);
 
     if (currentUser == null) {
-      return WelcomeScreen();
+      return const LoginScreen();
     } else {
       return CustomerScreen();
     }

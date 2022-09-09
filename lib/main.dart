@@ -1,7 +1,7 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grosa_store/firebase_options.dart';
 import 'package:grosa_store/models/Branch.dart';
 import 'package:grosa_store/models/CurrentUser.dart';
 import 'package:grosa_store/models/Offer.dart';
@@ -16,59 +16,55 @@ import 'package:grosa_store/screens/coupons.dart';
 import 'package:grosa_store/screens/customer_screen.dart';
 import 'package:grosa_store/screens/login_screen.dart';
 import 'package:grosa_store/screens/orders/orders.dart';
+import 'package:grosa_store/screens/register_screen.dart';
 import 'package:grosa_store/screens/shopping.dart';
 import 'package:grosa_store/screens/transactions/transactions.dart';
 import 'package:grosa_store/screens/wish_list.dart';
 import 'package:grosa_store/services/auth_service.dart';
 import 'package:grosa_store/services/database_service.dart';
 import 'package:provider/provider.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'models/Deal.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  setPathUrlStrategy();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         StreamProvider<CurrentUser?>.value(
-            value: AuthService().user,
-            initialData: CurrentUser(uid: '', photoURL: '', displayName: '')),
+          value: AuthService().user,
+          initialData: CurrentUser(),
+        ),
         StreamProvider<List<Deal>>.value(
           value: DatabaseService().deals,
-          initialData: [],
+          initialData: const [],
         ),
         StreamProvider<List<Branch>>.value(
           value: DatabaseService().branches,
-          initialData: [],
+          initialData: const [],
         ),
         StreamProvider<List<Offer>>.value(
           value: DatabaseService().offers,
-          initialData: [],
+          initialData: const [],
         ),
       ],
       child: MaterialApp(
         routes: {
-          '/': (context) => AnimatedSplashScreen(
-                splashIconSize: 240,
-                duration: 3000,
-                nextScreen: AuthStateScreen(),
-                splash: Container(
-                  height: 240,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('images/icon.png'),
-                          fit: BoxFit.contain)),
-                ),
-                splashTransition: SplashTransition.slideTransition,
-              ),
-          '/auth': (context) => AuthStateScreen(),
-          '/login': (context) => LoginScreen(),
+          '/': (context) => const AuthStateScreen(),
+          '/login': (context) => const LoginScreen(),
+          '/register': (context) => const RegisterScreen(),
 
           //Customer
           '/customers': (context) => CustomerScreen(),
@@ -87,9 +83,18 @@ class MyApp extends StatelessWidget {
         title: 'Grosa',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.green,
-            textTheme:
-                GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
+          primarySwatch: Colors.green,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                vertical: 40,
+              ),
+            ),
+          ),
+          textTheme: GoogleFonts.nunitoTextTheme(
+            Theme.of(context).textTheme,
+          ),
+        ),
       ),
     );
   }

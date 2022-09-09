@@ -42,9 +42,10 @@ class DatabaseService {
   //Get Customer Snapshot
   Customer _customerFromSnapshot(DocumentSnapshot snapshot) {
     return Customer(
-        image: snapshot.get('image'),
-        name: snapshot.get('name'),
-        number: snapshot.get('number'));
+        uid: snapshot.id,
+        image: snapshot.get('image') ?? '',
+        name: snapshot.get('name') ?? '',
+        number: snapshot.get('number') ?? '');
   }
 
   //Stream Customer Snapshot

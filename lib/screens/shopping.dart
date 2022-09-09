@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grosa_store/widgets/drawer_widget.dart';
 
 class Shopping extends StatefulWidget {
   @override
@@ -12,7 +11,6 @@ class _ShoppingState extends State<Shopping> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: drawerWidget(context),
       appBar: AppBar(
         title: Text(
           'Your Basket',

@@ -32,17 +32,17 @@ class AccountScreen extends StatelessWidget {
                         leading: CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.white,
-                          backgroundImage: NetworkImage(customer!.image),
+                          backgroundImage: NetworkImage(customer!.image.toString()),
                         ),
                         title: Text(
-                          customer.name,
+                          customer.name.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
                         subtitle: Text(
-                          customer.number,
+                          customer.number.toString(),
                           style: TextStyle(color: Colors.white),
                         ),
                         trailing: IconButton(
